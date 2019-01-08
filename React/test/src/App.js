@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import { ThemeContext, themes } from "./theme-context";
-import ThemedButton from "./themed-button";
+import { ThemeContext, themes } from "./components/theme-context";
+import ThemedButton from "././components/themed-button";
 
 const Toolbar = props => {
   return <ThemedButton onClick={props.changeTheme}>Change theme</ThemedButton>;
