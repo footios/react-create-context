@@ -1,34 +1,33 @@
 import React, { Component } from "react";
 
 import { ThemeContext, themes } from "./components/theme-context";
-import ThemedButton from "././components/themed-button";
+import ThemeTogglerButton from "././components/theme-toggler-button";
 
-const Toolbar = props => {
-  return <ThemedButton onClick={props.changeTheme}>Change theme</ThemedButton>;
-};
+const Content = () => <ThemeTogglerButton />;
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      theme: themes.light
-    };
 
+    // This func MUST be above this.state!!!
     this.toggleTheme = () => {
       this.setState(state => ({
         theme: state.theme === themes.dark ? themes.light : themes.dark
       }));
     };
+
+    this.state = {
+      theme: themes.light,
+      toggleTheme: this.toggleTheme
+    };
   }
 
   render() {
+    // The entire state is passed to the provider
     return (
-      <div>
-        <ThemeContext.Provider value={this.state.theme}>
-          <Toolbar changeTheme={this.toggleTheme} />
-        </ThemeContext.Provider>
-        <ThemedButton>Change Theme</ThemedButton>
-      </div>
+      <ThemeContext.Provider value={this.state}>
+        <Content />
+      </ThemeContext.Provider>
     );
   }
 }
